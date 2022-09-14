@@ -35,10 +35,12 @@ describe('StateManager', () => {
       .createSpy('createObjectURL')
       .and.returnValue('url');
 
-    spyOn(stateManager.phoenixMenuRoot, 'getNodeState').and.returnValue({
-      name: 'root',
-      children: [],
-    });
+    spyOn(stateManager.phoenixMenuRoot, 'getNodeState')
+      .and.returnValue({
+        name: 'root',
+        children: [],
+      })
+      .and.callThrough();
     spyOn(file, 'saveFile');
 
     stateManager.saveStateAsJSON();
