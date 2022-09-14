@@ -69,6 +69,8 @@ describe('SelectionManager', () => {
 
     spyOn(selectionManagerPrivate, 'disableSelecting').and.callThrough();
 
+    jasmine.createSpyObj(window, ['removeEventListener']);
+
     selectionManager['outlinePass'] = new OutlinePass(
       new THREE.Vector2(100, 100),
       new THREE.Scene(),
