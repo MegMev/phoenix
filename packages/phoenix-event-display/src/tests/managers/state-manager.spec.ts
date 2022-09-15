@@ -35,21 +35,17 @@ describe('StateManager', () => {
       .createSpy('createObjectURL')
       .and.returnValue('url');
 
-    spyOn(stateManager.phoenixMenuRoot, 'getNodeState')
-      .and.returnValue({
-        name: 'root',
-        children: [],
-      })
-      .and.callThrough();
+    const getNodeStateSpy = spyOn(
+      stateManager.phoenixMenuRoot,
+      'getNodeState'
+    ).and.returnValue({});
+
     spyOn(file, 'saveFile');
 
     stateManager.saveStateAsJSON();
 
-    expect(stateManager.phoenixMenuRoot.getNodeState).toHaveBeenCalled();
     expect(file.saveFile).toHaveBeenCalled();
-
-    expect(stateManager.eventMetadata.runNumber).toBe('000');
-    expect(stateManager.eventMetadata.eventNumber).toBe('000');
+    expect(getNodeStateSpy).toHaveBeenCalled();
   });
 
   it('should load the state of the event display from JSON', () => {

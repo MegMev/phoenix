@@ -1,4 +1,4 @@
-import { Scene, Camera, Object3D } from 'three';
+import { Camera, Object3D, Scene, Vector3 } from 'three';
 import { AnimationsManager } from '../../../managers/three-manager/animations-manager';
 import { RendererManager } from '../../../managers/three-manager/renderer-manager';
 import { SceneManager } from '../../../managers/three-manager/scene-manager';
@@ -12,39 +12,68 @@ describe('AnimationsManager', () => {
   beforeEach(() => {
     scene = new Scene();
     camera = new Camera();
-    rendererManager = new RendererManager();
     animationsManager = new AnimationsManager(scene, camera, rendererManager);
   });
 
-  it('should camera animate through event', () => {
-    spyOn(animationsManager, 'getCameraTween').and.callThrough();
+  it('should get the camera tween for animating camera to a position', () => {
+    const tween = animationsManager.getCameraTween([0, 1, 2], 0, 1);
 
-    animationsManager.animateThroughEvent([0, 0, 0], 5000);
-    expect(animationsManager.getCameraTween).toHaveBeenCalled();
+    expect(tween._object).toBeInstanceOf(Vector3);
+    expect(tween._object.x).toBe(0);
+    expect(tween._object.y).toBe(0);
+    expect(tween._object.z).toBe(0);
+
+    expect(tween._valuesStart).toEqual({});
+    expect(tween._valuesEnd).toEqual({ x: 0, y: 1, z: 2 });
+    expect(tween._easingFunction).toBe(1);
   });
 
-  it('should get hits', () => {
-    const hits = [2, 4, 5, 1, 2, 1]; // 2 hits
+  it('should animate the camera through the event scene', () => {
+    spyOn(animationsManager, 'getCameraTween').and.callThrough();
+
+    animationsManager.animateThroughEvent([0, 1, 2], 10, () => {});
+
+    expect(animationsManager.getCameraTween).toHaveBeenCalledTimes(29);
+  });
+
+  it('should get the positions of hits in a multidimensional array', () => {
+    const hits = [2, 4, 5, 1, 5, 1];
     expect((animationsManager as any).getHitsPositions(hits).length).toBe(2);
   });
 
-  describe('depending on event data', () => {
+  describe('It depends on the event data', () => {
     beforeEach(() => {
       const mockEventData = new Object3D();
       mockEventData.name = SceneManager.EVENT_DATA_ID;
       scene.add(mockEventData);
     });
 
-    it('should animate event with collision', () => {
-      spyOn(animationsManager, 'collideParticles').and.callThrough();
-      animationsManager.animateEventWithCollision(5000, () => {});
-      expect(animationsManager.collideParticles).toHaveBeenCalled();
+    it('should animate the propagation and generation of event data', () => {
+      spyOn(scene, 'getObjectByName').and.callThrough();
+
+      animationsManager.animateEvent(
+        500,
+        () => {},
+        () => {}
+      );
+
+      expect(scene.getObjectByName).toHaveBeenCalledTimes(1);
     });
 
-    it('should animate clipping with collision', () => {
-      spyOn(animationsManager, 'collideParticles').and.callThrough();
+    it('should animate the propagation and generation of event data with particle collison', () => {
+      spyOn(animationsManager, 'animateWithCollision').and.callThrough();
+
+      animationsManager.animateEventWithCollision(5000, () => {});
+
+      expect(animationsManager.animateWithCollision).toHaveBeenCalledTimes(1);
+    });
+
+    it('should animate the propagation and generation of event data using clipping planes after particle collison', () => {
+      spyOn(animationsManager, 'animateWithCollision').and.callThrough();
+
       animationsManager.animateClippingWithCollision(5000, () => {});
-      expect(animationsManager.collideParticles).toHaveBeenCalled();
+
+      expect(animationsManager.animateWithCollision).toHaveBeenCalledTimes(1);
     });
   });
 });
