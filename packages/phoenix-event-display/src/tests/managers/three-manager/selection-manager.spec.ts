@@ -54,6 +54,8 @@ describe('SelectionManager', () => {
   it('should set if selecting is to be enabled or disabled', () => {
     spyOn(selectionManagerPrivate, 'enableSelecting').and.callThrough();
     selectionManager['isInit'] = true;
+    spyOn(document, 'addEventListener').and.callThrough();
+    spyOn(window, 'addEventListener').and.callThrough();
 
     selectionManager['effectsManager'] = new EffectsManager(
       new Camera(),
@@ -65,11 +67,7 @@ describe('SelectionManager', () => {
 
     expect(selectionManagerPrivate.enableSelecting).toHaveBeenCalled();
 
-    jasmine.createSpyObj(window, ['addEventListener']);
-
     spyOn(selectionManagerPrivate, 'disableSelecting').and.callThrough();
-
-    jasmine.createSpyObj(window, ['removeEventListener']);
 
     selectionManager['outlinePass'] = new OutlinePass(
       new THREE.Vector2(100, 100),

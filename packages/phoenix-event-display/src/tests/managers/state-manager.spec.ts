@@ -35,17 +35,13 @@ describe('StateManager', () => {
       .createSpy('createObjectURL')
       .and.returnValue('url');
 
-    const getNodeStateSpy = spyOn(
-      stateManager.phoenixMenuRoot,
-      'getNodeState'
-    ).and.returnValue({});
-
     spyOn(file, 'saveFile');
+
+    stateManager.phoenixMenuRoot = new PhoenixMenuNode('root');
 
     stateManager.saveStateAsJSON();
 
     expect(file.saveFile).toHaveBeenCalled();
-    expect(getNodeStateSpy).toHaveBeenCalled();
   });
 
   it('should load the state of the event display from JSON', () => {
@@ -59,7 +55,7 @@ describe('StateManager', () => {
       },
     };
 
-    spyOn(stateManager, 'setClippingEnabled');
+    spyOn(stateManager, 'setClippingEnabled').and.callThrough();
 
     stateManager.loadStateFromJSON(JSON.stringify(jsonData));
 

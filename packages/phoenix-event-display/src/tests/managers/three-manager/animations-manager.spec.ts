@@ -12,6 +12,7 @@ describe('AnimationsManager', () => {
   beforeEach(() => {
     scene = new Scene();
     camera = new Camera();
+    rendererManager = new RendererManager();
     animationsManager = new AnimationsManager(scene, camera, rendererManager);
   });
 

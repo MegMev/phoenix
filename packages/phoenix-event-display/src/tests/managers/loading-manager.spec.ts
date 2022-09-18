@@ -39,7 +39,7 @@ describe('LoadingManager', () => {
     loadingManager.addLoadableItem('item');
     loadingManager.itemLoaded('item');
 
-    const callback = jasmine.createSpy('callback').and.callThrough();
+    const callback = jasmine.createSpy('callback', () => {});
 
     loadingManager.addLoadListenerWithCheck(callback);
 
