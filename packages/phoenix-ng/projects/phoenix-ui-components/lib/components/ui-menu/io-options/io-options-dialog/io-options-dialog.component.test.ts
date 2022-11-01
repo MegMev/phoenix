@@ -7,14 +7,14 @@ import { PhoenixUIModule } from '../../../phoenix-ui.module';
 import JSZip from 'jszip';
 import fetch from 'node-fetch';
 
-const mockFileList = (files: File[]): FileList => {
-  const fileList: FileList = {
-    length: files.length,
-    item: (index) => files[index],
-  };
-  Object.assign(fileList, files);
-  return fileList;
-};
+const mockFileList = jest.fn().mockReturnValue({
+  0: {
+    name: 'test_file.json',
+    type: 'application/json',
+  },
+  length: 1,
+  item: jest.fn(),
+});
 
 describe('IoOptionsDialogComponent', () => {
   let component: IOOptionsDialogComponent;

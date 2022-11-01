@@ -4,7 +4,7 @@ import { CollectionsInfoComponent } from './collections-info.component';
 import { Overlay } from '@angular/cdk/overlay';
 import { PhoenixUIModule } from '../../phoenix-ui.module';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { CollectionsInfoOverlayComponent } from 'phoenix-ui-components';
+import { CollectionsInfoOverlayComponent } from 'phoenix-ui-components/lib/components/ui-menu/collections-info/collections-info-overlay/collections-info-overlay.component';
 
 describe('CollectionsInfoComponent', () => {
   let component: CollectionsInfoComponent;

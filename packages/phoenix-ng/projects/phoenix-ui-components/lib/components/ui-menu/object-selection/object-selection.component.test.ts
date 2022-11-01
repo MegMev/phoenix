@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ObjectSelectionComponent } from './object-selection.component';
 import { Overlay } from '@angular/cdk/overlay';
-import { EventDisplayService } from '../../../services/event-display.service';
+import { EventDisplayService } from 'phoenix-ui-components/lib/services/event-display.service';
 import { PhoenixUIModule } from '../../phoenix-ui.module';
 
 describe('ObjectSelectionComponent', () => {

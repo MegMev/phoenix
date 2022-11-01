@@ -1,5 +1,6 @@
 import { OnInit, Component, Input } from '@angular/core';
-import { CMSLoader, JiveXMLLoader, readZipFile } from 'phoenix-event-display';
+import { CMSLoader, JiveXMLLoader } from 'phoenix-event-display';
+import { readZipFile } from 'phoenix-event-display/src/helpers/zip';
 import { EventDisplayService } from '../../../../services/event-display.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import {
