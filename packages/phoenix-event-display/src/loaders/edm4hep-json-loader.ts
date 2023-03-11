@@ -182,9 +182,9 @@ export class Edm4hepJsonLoader extends PhoenixLoader {
       rawVertices.forEach((rawVertex: any) => {
         const position: any[] = [];
         if ('position' in rawVertex) {
-          position.push(rawVertex['position']['x'] * 0.1);
-          position.push(rawVertex['position']['y'] * 0.1);
-          position.push(rawVertex['position']['z'] * 0.1);
+          position.push(rawVertex['position']['x'] );
+          position.push(rawVertex['position']['y'] );
+          position.push(rawVertex['position']['z'] );
         }
 
         const vertex = {
@@ -243,9 +243,9 @@ export class Edm4hepJsonLoader extends PhoenixLoader {
             );
             const trackerHit = trackerHits[trackerHitRef['index']];
             positions.push([
-              trackerHit['position']['x'] * 0.1,
-              trackerHit['position']['y'] * 0.1,
-              trackerHit['position']['z'] * 0.1,
+              trackerHit['position']['x'] ,
+              trackerHit['position']['y'] ,
+              trackerHit['position']['z'] ,
             ]);
           });
         }
@@ -254,9 +254,9 @@ export class Edm4hepJsonLoader extends PhoenixLoader {
           trackStates.forEach((trackState: any) => {
             if ('referencePoint' in trackState) {
               positions.push([
-                trackState['referencePoint']['x'] * 0.1,
-                trackState['referencePoint']['y'] * 0.1,
-                trackState['referencePoint']['z'] * 0.1,
+                trackState['referencePoint']['x'],
+                trackState['referencePoint']['y'],
+                trackState['referencePoint']['z'],
               ]);
             }
           });
@@ -336,9 +336,9 @@ export class Edm4hepJsonLoader extends PhoenixLoader {
       rawHits.forEach((rawHit: any) => {
         const position: any[] = [];
         if ('position' in rawHit) {
-          position.push(rawHit['position']['x'] * 0.1);
-          position.push(rawHit['position']['y'] * 0.1);
-          position.push(rawHit['position']['z'] * 0.1);
+          position.push(rawHit['position']['x'] );
+          position.push(rawHit['position']['y'] );
+          position.push(rawHit['position']['z'] );
         }
 
         const hit = {
@@ -418,9 +418,9 @@ export class Edm4hepJsonLoader extends PhoenixLoader {
       const cellsHue = Math.floor(Math.random() * 358);
 
       rawCells.forEach((rawCell: any) => {
-        const x = rawCell.position.x * 0.1;
-        const y = rawCell.position.y * 0.1;
-        const z = rawCell.position.z * 0.1;
+        const x = rawCell.position.x ;
+        const y = rawCell.position.y ;
+        const z = rawCell.position.z ;
 
         const r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
         const rho = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
@@ -473,9 +473,9 @@ export class Edm4hepJsonLoader extends PhoenixLoader {
       const clusters: any[] = [];
 
       rawClusters.forEach((rawCluster: any) => {
-        const x = rawCluster.position.x * 0.1;
-        const y = rawCluster.position.y * 0.1;
-        const z = rawCluster.position.z * 0.1;
+        const x = rawCluster.position.x ;
+        const y = rawCluster.position.y ;
+        const z = rawCluster.position.z ;
 
         const r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
         const rho = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
