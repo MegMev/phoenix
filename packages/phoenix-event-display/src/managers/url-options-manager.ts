@@ -1,5 +1,6 @@
 import { JiveXMLLoader } from '../loaders/jivexml-loader';
 import { PhoenixLoader } from '../loaders/phoenix-loader';
+import { Edm4hepJsonLoader } from '../loaders/edm4hep-json-loader';
 import { Configuration } from '../lib/types/configuration';
 import { EventDisplay } from '../event-display';
 import { StateManager } from './state-manager';
@@ -110,6 +111,9 @@ export class URLOptionsManager {
       } else if (type === 'zip') {
         console.log('Opening zip file');
         return this.handleZipFileEvents(fileURL);
+      } else if (type === 'edm4hep.json') {
+        console.log('Opening edm4hep.json file');
+        return this.handleEdm4hepJSONEvents(fileURL);
       } else {
         return this.handleJSONEvent(fileURL);
       }
@@ -149,6 +153,19 @@ export class URLOptionsManager {
     const eventData = loader.getEventData();
     this.eventDisplay.buildEventDataFromJSON(eventData);
   }
+
+    /**
+     * Handle JSON event from file URL.
+     * @param fileURL URL to the JSON file.
+     * @returns An empty promise. ;(
+     */
+    private async handleEdm4hepJSONEvents(fileURL: string) {
+        const fileData = await (await fetch(fileURL)).json();
+        const edm4hepJsonLoader = new Edm4hepJsonLoader();
+        edm4hepJsonLoader.setRawEventData(fileData);
+        edm4hepJsonLoader.processEventData();
+        this.eventDisplay.parsePhoenixEvents(edm4hepJsonLoader.getEventData());
+    }
 
   /**
    * Handle JSON event from file URL.

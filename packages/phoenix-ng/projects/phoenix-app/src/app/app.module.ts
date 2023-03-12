@@ -10,11 +10,13 @@ import { LHCbComponent } from './sections/lhcb/lhcb.component';
 import { VPToggleComponent } from './sections/lhcb/vp-toggle/vp-toggle.component';
 import { CMSComponent } from './sections/cms/cms.component';
 import { TrackmlComponent } from './sections/trackml/trackml.component';
-import { PhoenixUIModule } from 'phoenix-ui-components';
-import { RouterModule, Routes } from '@angular/router';
 import { PlaygroundComponent } from './sections/playground/playground.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MegatComponent } from './sections/megat/megat.component';
+
+import { PhoenixUIModule } from 'phoenix-ui-components';
 import { environment } from '../environments/environment';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let routes: Routes;
 
@@ -30,6 +32,7 @@ if (environment?.singleEvent) {
     { path: 'cms', component: CMSComponent },
     { path: 'trackml', component: TrackmlComponent },
     { path: 'playground', component: PlaygroundComponent },
+    { path: 'megat', component: MegatComponent },
   ];
 }
 
@@ -44,6 +47,7 @@ if (environment?.singleEvent) {
     CMSComponent,
     TrackmlComponent,
     PlaygroundComponent,
+    MegatComponent,
   ],
   imports: [
     BrowserModule,
