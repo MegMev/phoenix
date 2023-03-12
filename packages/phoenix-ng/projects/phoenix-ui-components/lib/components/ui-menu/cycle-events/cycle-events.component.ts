@@ -9,6 +9,7 @@ export class CycleEventsComponent implements OnInit {
   @Input()
   interval: number;
 
+  @Input()
   active: boolean = false;
 
   private intervalId: NodeJS.Timer;
@@ -21,6 +22,9 @@ export class CycleEventsComponent implements OnInit {
     this.eventDisplay.listenToLoadedEventsChange(
       (events) => (this.events = events)
     );
+    if(this.active) {
+      this.startCycleInterval();
+    }
   }
 
   toggleCycle() {
