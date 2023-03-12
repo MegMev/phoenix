@@ -59,10 +59,21 @@ export class MegatComponent implements OnInit {
 
     this.eventDisplay.init(configuration);
 
-    this.eventDisplay.loadRootGeometry('assets/geometry/Megat/megat.root',
-                                       'geometry',
-                                       'megat',
-                                      );
+    try {
+      this.eventDisplay.loadGLTFGeometry(
+        'assets/geometry/Megat/megat.gltf',
+        undefined, // name, ignored when empty
+        undefined, // menuNodeName
+        1, // scale
+        true // initiallyVisible
+      );
+    } catch (e) {
+      console.log('Error:', e);
+    }
+    // this.eventDisplay.loadRootGeometry('assets/geometry/Megat/megat.root',
+    //                                    'geometry',
+    //                                    'megat',
+    //                                   );
 
     this.eventDisplay
       .getLoadingManager()
