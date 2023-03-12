@@ -419,6 +419,8 @@ export class ImportManager {
     doubleSided?: boolean
   ) {
     geometry.name = name;
+      // [todo:] quick fix, temporary
+    geometry.userData.opacity=0.04;
     // Set a custom scale if provided
     if (scale) {
       geometry.scale.setScalar(scale);
