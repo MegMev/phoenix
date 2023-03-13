@@ -40,16 +40,27 @@ export class MegatComponent implements OnInit {
       eventDataLoader: new Edm4hepJsonLoader(),
       presetViews: [
         new PresetView(
-          'Global View',
-          [-600, 600, 0],
+          'Top View',
+          // [-462, 80, -256],
+          [-333, 120, 370],
           [0, 0, 0],
           'perspective',
           ClippingSetting.On,
-          90,
-          90
+          110,
+          75
+        ),
+        new PresetView(
+          'Bottom View',
+          // [-462, 80, -256],
+          [-400, 115, -300],
+          [0, 0, 0],
+          'perspective',
+          ClippingSetting.On,
+          110,
+          75
         ),
       ],
-      defaultView: [400, -400, 0, 0, -200, 0], // x,y,z of position followed by x,y,z of target
+      defaultView: [-460, 80, -255, 0, 0, 0], // x,y,z of position followed by x,y,z of target
       phoenixMenuRoot: this.phoenixMenuRoot,
       defaultEventFile: {
         eventFile: 'assets/files/megat/megat.edm4hep.json',
@@ -70,10 +81,10 @@ export class MegatComponent implements OnInit {
     } catch (e) {
       console.log('Error:', e);
     }
-    // this.eventDisplay.loadRootGeometry('assets/geometry/Megat/megat.root',
-    //                                    'geometry',
-    //                                    'megat',
-    //                                   );
+
+    this.eventDisplay
+      .getUIManager()
+      .displayView(configuration.presetViews[0]);
 
     this.eventDisplay
       .getLoadingManager()

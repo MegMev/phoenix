@@ -420,7 +420,7 @@ export class ImportManager {
   ) {
     geometry.name = name;
       // [todo:] quick fix, temporary
-    geometry.userData.opacity=0.04;
+    geometry.userData.opacity=0.08;
     // Set a custom scale if provided
     if (scale) {
       geometry.scale.setScalar(scale);
