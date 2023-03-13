@@ -40,9 +40,9 @@ export class MegatComponent implements OnInit {
       eventDataLoader: new Edm4hepJsonLoader(),
       presetViews: [
         new PresetView(
-          'Top View',
+          'Bottom View',
           // [-462, 80, -256],
-          [-333, 120, 370],
+          [-400, 115, -300],
           [0, 0, 0],
           'perspective',
           ClippingSetting.On,
@@ -50,9 +50,9 @@ export class MegatComponent implements OnInit {
           75
         ),
         new PresetView(
-          'Bottom View',
+          'Top View',
           // [-462, 80, -256],
-          [-400, 115, -300],
+          [-333, 120, 370],
           [0, 0, 0],
           'perspective',
           ClippingSetting.On,
