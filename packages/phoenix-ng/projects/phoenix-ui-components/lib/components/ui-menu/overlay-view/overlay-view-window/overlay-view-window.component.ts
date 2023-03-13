@@ -22,8 +22,8 @@ export class OverlayViewWindowComponent implements AfterViewInit {
   }
 
   initializeCanvas(canvas: HTMLCanvasElement): HTMLCanvasElement {
-    const width = window.innerWidth / 2.5;
-    const height = window.innerHeight / 2.5;
+    const width = window.innerWidth / 3.8;
+    const height = window.innerHeight / 3.8;
     canvas.width = width;
     canvas.height = height;
     canvas.style.width = width.toString() + ' px';

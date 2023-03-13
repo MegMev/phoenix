@@ -1,5 +1,5 @@
-import { Component, ComponentRef, OnDestroy, OnInit } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
+import { Component, ComponentRef, OnDestroy, OnInit, Input } from '@angular/core';
+import {  Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { OverlayViewWindowComponent } from './overlay-view-window/overlay-view-window.component';
 
@@ -9,8 +9,12 @@ import { OverlayViewWindowComponent } from './overlay-view-window/overlay-view-w
   styleUrls: ['./overlay-view.component.scss'],
 })
 export class OverlayViewComponent implements OnInit, OnDestroy {
+  @Input()
+  showOverlay: boolean = false;
+  @Input()
+  transparent: boolean = false;
+
   overlayWindow: ComponentRef<OverlayViewWindowComponent>;
-  showOverlay = false;
 
   constructor(private overlay: Overlay) {}
 
@@ -19,6 +23,7 @@ export class OverlayViewComponent implements OnInit, OnDestroy {
     const overlayPortal = new ComponentPortal(OverlayViewWindowComponent);
     this.overlayWindow = overlayRef.attach(overlayPortal);
     this.overlayWindow.instance.showOverlay = this.showOverlay;
+    this.overlayWindow.instance.transparentBody = this.transparent;
   }
 
   ngOnDestroy(): void {
